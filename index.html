@@ -119,7 +119,7 @@ h3.sec{font-size:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
 .cbody p{margin:0;color:#4b5c56;font-size:14px}
 .acts{display:flex;flex-wrap:wrap;gap:8px}
 .cbody .acts{margin-top:auto;padding-top:10px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:1px solid #0f1a17;border-radius:10px;background:#fff;color:#0f1a17;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap}
+.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:1px solid #0f1a17;border-radius:10px;background:#fff;color:#0f1a17;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap}
 .btn:hover{background:#eef4f1}
 .btn.pri{background:var(--green);border-color:var(--green);color:#fff}
 .btn.pri:hover{background:#00634f}
@@ -401,14 +401,14 @@ const CVS=[
  {l:2,file:"Akash_Kandar_CV_Tech.pdf",img:"Tech",role:"For software engineering and backend roles."},
  {l:3,file:"Akash_Kandar_CV_Analytics_Consulting.pdf",img:"Analytics_Consulting",role:"For analytics, product and consulting roles."}
 ];
-$("cvgrid").innerHTML=CVS.map((c,i)=>{const l=L[c.l];return `<article class="card" data-cv="${i}"><button type="button" class="thumb" data-view aria-label="Open the ${l.name} CV"><img src="img/${c.img}-thumb.webp" alt="First page of the ${l.name} CV" width="560" height="420" loading="lazy"></button><div class="cbody"><h3><span class="bul" style="background:${l.hex}">${l.code}</span>${l.name} CV</h3><p>${c.role}</p><div class="acts"><button type="button" class="btn" data-view>View</button><a class="btn pri" href="cv/${c.file}" download="${c.file}">Download PDF</a></div></div></article>`}).join("");
+$("cvgrid").innerHTML=CVS.map((c,i)=>{const l=L[c.l];return `<article class="card" data-cv="${i}"><button type="button" class="thumb" data-view aria-label="Open the ${l.name} CV"><img src="${c.img}-thumb.webp" alt="First page of the ${l.name} CV" width="560" height="420" loading="lazy"></button><div class="cbody"><h3><span class="bul" style="background:${l.hex}">${l.code}</span>${l.name} CV</h3><p>${c.role}</p><div class="acts"><button type="button" class="btn" data-view>View</button><a class="btn pri" href="${c.file}" download="${c.file}">Download PDF</a></div></div></article>`}).join("");
 
 const viewer=$("viewer");
 const view=i=>{
  const c=CVS[i],l=L[c.l];
  $("vtitle").innerHTML=`${l.name} CV`;
- $("vdl").href="cv/"+c.file;$("vdl").setAttribute("download",c.file);
- $("vpages").innerHTML=[1,2].map(n=>`<img src="img/${c.img}-${n}.webp" alt="Page ${n} of the ${l.name} CV" width="1240" height="1755">`).join("");
+ $("vdl").href=c.file;$("vdl").setAttribute("download",c.file);
+ $("vpages").innerHTML=[1,2].map(n=>`<img src="${c.img}-${n}.webp" alt="Page ${n} of the ${l.name} CV" width="1240" height="1755">`).join("");
  if(viewer.showModal)viewer.showModal();else viewer.setAttribute("open","");
  viewer.scrollTop=0;
 };
