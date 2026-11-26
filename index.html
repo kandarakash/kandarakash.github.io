@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akash Kandar</title>
+<meta name="description" content="Akash Kandar, B.Tech at IIT Delhi. CVs for data science, quant, tech and analytics and consulting roles.">
+<meta property="og:title" content="Akash Kandar">
+<meta property="og:description" content="B.Tech, IIT Delhi. CVs for data science, quant, tech and analytics and consulting roles.">
+<meta property="og:type" content="profile">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%2300463c%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Arial%27 font-weight=%27700%27 font-size=%2716%27 fill=%27%23fff%27 text-anchor=%27middle%27%3EAK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE work: a recruiter-facing record, calm and exact
+   IDEA a transit line map: each CV is a line, each project a stop, shared projects are interchanges
+   PICTURE full-width line map in the hero; picking a line or a stop opens that CV below
+   COLOUR deep green #00463c hero and footer, white page, lime-white #e6f5c8; line colours yellow, coral, sky, lime
+   TYPE Inter Tight 700 + Inter
+   LAYOUT name across the top, map full width beneath, sticky line picker, CV as main column + aside; phone: map turns vertical */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0e1513);--ink:light-dark(#0f1a17,#e6eeea);--mute:light-dark(#4b5c56,#a3b3ad);--rule:light-dark(#dde4e1,#26332f);--panel:light-dark(#eef4f1,#17221f);--acc:light-dark(#00634f,#b8e35a);--green:#00463c;--lime:#e6f5c8}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:88px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Inter Tight",Inter,system-ui,sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.05;margin:0}
+a{color:inherit}
+button{font:inherit}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding-block:clamp(28px,4vw,64px);padding-left:max(5vw,16px,env(safe-area-inset-left,0px));padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+.hero{background:var(--green);color:#fff;padding-bottom:clamp(16px,2.4vw,32px)}
+.top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 32px;align-items:end}
+.hero h1{font-size:clamp(46px,8vw,92px);line-height:.98;letter-spacing:-.035em}
+.deg{font:600 clamp(17px,1.8vw,20px)/1.35 "Inter Tight",Inter,sans-serif;color:var(--lime);margin:14px 0 0}
+.about{max-width:64ch;margin:12px 0 0;color:#d6e7df;font-size:17px}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid rgba(230,245,200,.5);border-radius:999px;text-decoration:none;color:#fff;white-space:nowrap}
+.links a span{color:var(--lime);font-size:14px}
+.links a:hover{background:rgba(255,255,255,.09)}
+.mapcap{margin:clamp(24px,3vw,40px) 0 0;color:var(--lime);font-size:15px;max-width:70ch}
+.map{width:100%}
+.map svg{display:block;width:100%}
+.map text{font-family:Inter,system-ui,sans-serif}
+.map [data-line],.map [data-stn]{cursor:pointer}
+.sl{font-size:13px;fill:var(--lime);opacity:.55}
+.sl.on{fill:#fff;opacity:1;font-weight:600}
+.sl:hover{opacity:1}
+.ll{font-size:15px;font-weight:600;fill:var(--lime);opacity:.6}
+.ll.on{fill:#fff;opacity:1}
+.lbt{font:700 13px "Inter Tight",Inter,sans-serif;fill:#0f1a17}
+.lb:not(.on){opacity:.5}
+.hit{fill:none;stroke:transparent;stroke-width:24}
+.tr{fill:none;stroke-width:5;stroke-linecap:round;opacity:.32}
+.ln:hover .tr{opacity:.7}
+.ln.on .tr{stroke-width:8;opacity:1}
+.cn{stroke:#fff;stroke-width:9;stroke-linecap:round}
+.st{fill:#fff;stroke-width:3.5}
+.st:not(.on){opacity:.8}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:dr .8s cubic-bezier(.3,.7,.3,1) forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.bar{position:relative;z-index:5;background:var(--bg);border-bottom:1px solid var(--rule);padding-block:12px}
+@media(min-width:900px){.bar{position:sticky;top:0}}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.tab{display:flex;align-items:center;gap:10px;min-height:50px;padding:6px 12px;border:1px solid var(--rule);border-radius:12px;background:transparent;color:var(--ink);font-weight:600;font-size:15px;line-height:1.2;text-align:left;cursor:pointer}
+.tab:hover{border-color:var(--mute)}
+.tab[aria-selected=true]{background:var(--panel);border-color:var(--ink)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.bul{flex:none;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font:700 13px/1 "Inter Tight",Inter,sans-serif;color:#0f1a17}
+.cvhead{margin-bottom:clamp(24px,3vw,40px)}
+.cvhead h2{display:flex;align-items:center;gap:14px;font-size:clamp(32px,4.4vw,52px)}
+.cvhead h2 .bul{width:42px;height:42px;font-size:19px}
+.cvhead p{margin:12px 0 0;max-width:68ch;color:var(--mute);font-size:17px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,350px);gap:clamp(32px,4vw,64px);align-items:start}
+main section+section,.side section+section{margin-top:44px}
+h3.sec{font-size:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.item{padding:22px 0;border-bottom:1px solid var(--rule);scroll-margin-top:92px}
+.item h4{font-size:20px;line-height:1.2}
+.org{margin:6px 0 0;color:var(--mute);font-size:15px}
+.when{margin:3px 0 0;color:var(--acc);font-size:14px;font-weight:600;white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none}
+.tags li{font-size:13px;line-height:1.3;padding:4px 9px;border-radius:6px;background:var(--panel)}
+.pts{margin:14px 0 0;padding-left:18px}
+.pts li{margin:0 0 8px}
+.pts li::marker{color:var(--mute)}
+.pts b{font-weight:600}
+.xch{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:6px;color:var(--mute);font-size:14px}
+.xch button{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 10px 0 6px;border:1px solid var(--rule);border-radius:999px;background:transparent;color:var(--ink);font-size:14px;cursor:pointer}
+.xch button:hover{border-color:var(--mute)}
+.xch .bul{width:22px;height:22px;font-size:12px}
+@media(min-width:1180px){.item{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0 32px}.pts{margin-top:2px}}
+.edu,.ach,.lead,.act{list-style:none;margin:0;padding:0}
+.edu li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:13px 0;border-bottom:1px solid var(--rule)}
+.edu .r{text-align:right;white-space:nowrap;color:var(--mute);font-size:15px}
+.edu .i{color:var(--mute);font-size:15px}
+.ach li{padding:13px 0;border-bottom:1px solid var(--rule)}
+.ach .h{display:flex;justify-content:space-between;gap:12px;font-weight:600}
+.ach .h span{color:var(--mute);font-weight:500;font-size:14px;white-space:nowrap}
+.ach p{margin:3px 0 0;color:var(--mute);font-size:15px}
+.sk{margin:0}
+.sk dt{font-weight:600;margin-top:14px}
+.sk dd{margin:2px 0 0;color:var(--mute);font-size:15px}
+.note{margin:14px 0 0;color:var(--mute);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.chips li{font-size:13px;line-height:1.3;padding:5px 10px;border-radius:6px;background:var(--panel)}
+.lower{border-top:1px solid var(--rule)}
+.crs .chips{margin-top:14px;gap:8px}
+[hidden]{display:none!important}
+.cvs{margin-top:clamp(28px,3.5vw,44px)}
+.cvs h2{font-size:clamp(24px,2.6vw,30px)}
+.cvs .sub{margin:6px 0 0;color:var(--lime);font-size:15px}
+.cvgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:18px}
+.card{display:flex;flex-direction:column;background:#fff;color:#0f1a17;border-radius:14px;overflow:hidden}
+.thumb{display:block;width:100%;padding:0;border:0;border-bottom:1px solid #dde4e1;background:#fff;cursor:zoom-in}
+.thumb img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:top}
+.cbody{display:flex;flex-direction:column;gap:6px;flex:1;padding:14px 16px 16px}
+.cbody h3{display:flex;align-items:center;gap:10px;font-size:19px}
+.cbody p{margin:0;color:#4b5c56;font-size:14px}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.cbody .acts{margin-top:auto;padding-top:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:1px solid #0f1a17;border-radius:10px;background:#fff;color:#0f1a17;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:#eef4f1}
+.btn.pri{background:var(--green);border-color:var(--green);color:#fff}
+.btn.pri:hover{background:#00634f}
+.cst{margin:0;color:#b4231a!important;font-size:13px!important}
+.cst:empty{display:none}
+dialog{width:min(920px,calc(100vw - 24px));max-height:calc(100vh - 24px);padding:0;border:0;border-radius:14px;background:var(--bg);color:var(--ink);overflow:auto}
+dialog::backdrop{background:rgba(0,24,20,.72)}
+.vhead{position:sticky;top:0;z-index:1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;padding:12px 16px;background:var(--bg);border-bottom:1px solid var(--rule)}
+.vhead h3{font-size:20px}
+.vhead .btn:not(.pri){background:var(--bg);color:var(--ink);border-color:var(--ink)}
+.vstat{margin:0;padding:0 16px;color:#d0442f;font-size:14px}
+.vstat:empty{display:none}
+.pages{display:grid;gap:16px;padding:16px;background:var(--panel)}
+.pages img{display:block;width:100%;height:auto;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+@media(max-width:1000px){.cvgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:440px){.cvgrid{gap:10px}.cbody{padding:12px}.cbody h3{font-size:17px}.cbody .btn{flex:1;padding:0 8px}}
+.crs .chips li{font-size:14px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,4vw,64px)}
+.lead li,.act li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.lead strong,.act strong{font-weight:600}
+.lead .o,.act .o{grid-column:1/-1;color:var(--mute);font-size:15px}
+.lead .d{color:var(--mute);font-size:14px;white-space:nowrap}
+.lead ul{grid-column:1/-1;margin:6px 0 0;padding-left:18px;font-size:15px}
+.lead ul li{display:list-item;padding:0;border:0;margin:0 0 4px}
+.foot{background:var(--green);color:#fff}
+.fgrid{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px 32px}
+.foot h2{font-size:clamp(30px,4vw,44px)}
+.foot p{margin:8px 0 0;color:var(--lime)}
+.upd{margin-top:28px!important;font-size:14px;opacity:.8}
+@media(max-width:860px){.cols{grid-template-columns:minmax(0,1fr)}.top{grid-template-columns:minmax(0,1fr);align-items:start}}
+@media(max-width:600px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.tab{font-size:14px}.about{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.draw{animation:none;stroke-dashoffset:0}}
+@media print{.mapcap,.map,.bar,.xch,.links,.foot{display:none}.hero{background:none;color:#000}.deg,.about{color:#333}.cols{grid-template-columns:minmax(0,1fr) 300px}.band{padding:16px 0}}
+</style>
+</head>
+<body>
+<header class="band hero">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Akash Kandar</h1>
+        <p class="deg">B.Tech, Indian Institute of Technology Delhi, 2023 – 2027</p>
+        <p class="about">I work where machine learning, markets and software meet: quantitative research on crude oil futures at Futures First, deep learning and LLM projects through Amazon ML Summer School, and full-stack systems. Codeforces Expert, Gold level on WorldQuant BRAIN and a CFA Level I candidate.</p>
+      </div>
+      <nav class="links" aria-label="Profiles elsewhere">
+        <a href="https://github.com/kandarakash">GitHub <span>kandarakash</span></a>
+        <a href="https://codeforces.com/profile/akash_kandar_31">Codeforces <span>akash_kandar_31</span></a>
+      </nav>
+    </div>
+    <section class="cvs" aria-labelledby="cvs-h">
+      <h2 id="cvs-h">My CVs</h2>
+      <p class="sub">Four versions, each written for a different kind of role. Open one to read it, or download the PDF.</p>
+      <div class="cvgrid" id="cvgrid"></div>
+    </section>
+    <p class="mapcap">Each line is one of my four CVs and each stop is a project. Joined stops appear on more than one CV. Pick a line or a stop to open it below.</p>
+    <div class="map" id="map"><svg id="mapsvg" role="img" aria-label="Line map of projects across the Data Science, Quant, Tech and Analytics and Consulting CVs"></svg></div>
+  </div>
+</header>
+
+<div class="bar band" style="padding-block:12px">
+  <div class="wrap tabs" id="tabs" role="tablist" aria-label="Choose a CV"></div>
+</div>
+
+<main class="band">
+  <div class="wrap">
+    <div class="cvhead" id="cvhead"></div>
+    <div class="cols">
+      <div id="cvmain"></div>
+      <aside class="side">
+        <section>
+          <h3 class="sec">Education</h3>
+          <ul class="edu">
+            <li><strong>B.Tech</strong><span class="r">2023 – 2027</span><span class="i">Indian Institute of Technology Delhi</span></li>
+            <li><strong>Class XII, CBSE</strong><span class="r">2022</span><span class="i">Delhi Public School, R.K. Puram</span><span class="r">96.0%</span></li>
+            <li><strong>Class X, CBSE</strong><span class="r">2020</span><span class="i">Delhi Public School, R.K. Puram</span><span class="r">97.2%</span></li>
+          </ul>
+        </section>
+        <section>
+          <h3 class="sec">Achievements</h3>
+          <ul class="ach" id="ach"></ul>
+        </section>
+        <section>
+          <h3 class="sec">Skills</h3>
+          <dl class="sk" id="skills"></dl>
+          <p class="note">Also used in this CV's projects</p>
+          <ul class="chips" id="used"></ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<section class="band lower">
+  <div class="wrap crs">
+    <h3 class="sec">Selected coursework</h3>
+    <ul class="chips" id="courses"></ul>
+  </div>
+</section>
+
+<dialog id="viewer" aria-labelledby="vtitle">
+  <div class="vhead">
+    <h3 id="vtitle"></h3>
+    <div class="acts">
+      <a class="btn pri" id="vdl" href="#" download>Download PDF</a>
+      <button type="button" class="btn" id="vclose">Close</button>
+    </div>
+  </div>
+  <div class="pages" id="vpages"></div>
+</dialog>
+
+<footer class="band foot">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h2>Akash Kandar</h2>
+        <p>B.Tech, Indian Institute of Technology Delhi</p>
+      </div>
+      <nav class="links" aria-label="Contact">
+        <a href="https://github.com/kandarakash">GitHub <span>kandarakash</span></a>
+        <a href="https://codeforces.com/profile/akash_kandar_31">Codeforces <span>akash_kandar_31</span></a>
+      </nav>
+    </div>
+    <p class="upd">Updated November 2026</p>
+  </div>
+</footer>
+
+<script>
+{
+const SK2=[["Languages","Python, C++, Java, C, SQL, JavaScript, HTML, CSS"],["Libraries","NumPy, Pandas, scikit-learn, Matplotlib"],["Systems","Linux, macOS, Windows"]];
+const L=[
+ {id:"data-science",name:"Data Science",short:"Data science",code:"D",hex:"#ffd166",p:["sql","readmit","cgcnn","retinal","seg"],
+  sum:"Models across language, vision, tabular and graph data, built through Amazon ML Summer School and research with Prof. Arihant Bhandari.",
+  sk:[["Languages","Python, Java, SQL, LaTeX"],["ML and data","scikit-learn, NumPy, Pandas, TensorFlow, Keras, OpenCV"],["Software","MATLAB, Simulink, Power BI, Excel, SolidWorks, ANSYS Fluent, CONVERGE, Autodesk Inventor"]]},
+ {id:"quant",name:"Quant",short:"Quant",code:"Q",hex:"#ff6f59",p:["swap","sql","pod","churn","flight"],
+  sum:"Quantitative research on crude oil futures at Futures First, exotic rates pricing at the Goldman Sachs hackathon, and alpha research on WorldQuant BRAIN.",sk:SK2},
+ {id:"tech",name:"Tech",short:"Tech",code:"T",hex:"#6cc4ff",p:["ride","meta","pod","churn","flight"],
+  sum:"Backend and full-stack engineering: Spring Boot microservices, a metadata-driven Next.js runtime, Kubernetes monitoring with LLM agents and an MLOps pipeline.",sk:SK2},
+ {id:"analytics-consulting",name:"Analytics &amp; Consulting",short:"Analytics",code:"A",hex:"#b8e35a",p:["saas","churn","funnel","sql","cgcnn"],
+  sum:"Revenue, retention and funnel analytics for SaaS products, start-up strategy work with the Business and Consulting Club, and first places in a case competition and a management quiz.",sk:SK2}
+];
+const P={
+ ff:{lab:"Futures First",t:"Quantitative Research Intern, International Crude Market",org:"Futures First Info Services",when:"May 2026 – Jul 2026",tags:["Grid search + CV","HMM","Random Forest","ARIMA","GARCH","VAR"],pts:[
+  "Built a grid-search + cross-validation optimizer on <b>51K+ CLQ26 ticks</b>, reducing overfitting and finding the optimal indicators.",
+  "Constructed <b>20+ quant trading models</b> on indicators such as RSI, VWAP and Bollinger Bands, with a best profit factor of <b>2.0</b>.",
+  "Engineered a Hidden Markov Model pipeline for regime detection and a Random Forest for portfolio optimization.",
+  "Deployed predictive models (ARIMA, GARCH, VAR, regression), improving price and volatility forecasts by up to <b>18%</b>."]},
+ sql:{lab:"Text-to-SQL",t:"Text-to-SQL LLM Agent",org:"Amazon ML Summer School",when:"May 2025 – Jul 2025",tags:["LLaMA-3-8B","LoRA","LangGraph"],pts:[
+  "Fine-tuned LLaMA-3-8B with LoRA on 7K Spider pairs, reaching <b>74.6% execution accuracy</b>, +6.8 pp over GPT-3.5 zero-shot.",
+  "Built a LangGraph self-correction loop that lifted accuracy to <b>81.3%</b>, eliminating 26% of initial errors with &lt;200 ms retry latency.",
+  "Evaluated on finance, healthcare and e-commerce schemas, holding the unseen-domain accuracy drop to <b>9.4%</b> vs 17% for the baseline."]},
+ readmit:{lab:"Readmission",t:"Hospital Readmission Prediction with a Calibrated Ensemble",org:"",when:"May 2026 – Jun 2026",tags:["XGBoost","LightGBM","SHAP","SMOTE"],pts:[
+  "Built a calibrated stacked ensemble (XGBoost + LightGBM) on <b>130K+ patient records</b>, with an AUC-ROC of <b>0.82</b>.",
+  "Handled severe class imbalance (8.5% minority class) with SMOTE oversampling and calibrated probabilities with Platt scaling.",
+  "Built a SHAP explainability layer showing the 8 main readmission drivers; the report projected a <b>15% reduction</b> in readmissions."]},
+ cgcnn:{lab:"Crystal GNN",t:"Crystal Graph Neural Network for Li-ion Battery Property Prediction",org:"Research with Prof. Arihant Bhandari",when:"Jul 2026 – Nov 2026",tags:["PyTorch Geometric","CGCNN","Graph neural networks"],pts:[
+  "Built a CGCNN in PyTorch Geometric on <b>2,774 Li-ion materials</b> using elemental and structural features.",
+  "Predicted battery voltage and gravimetric capacity with <b>0.38 V MAE</b> and <b>0.84 R²</b>, about 30% lower error than an MLP baseline.",
+  "Used node and edge attribution with parity analysis to identify the Li-ion sites and structural features that drive voltage."]},
+ retinal:{lab:"Retinal ViT",t:"Retinal Disease Classification with a Vision Transformer",org:"Amazon ML Summer School",when:"May 2026 – Aug 2026",tags:["PyTorch","ViT-B/16","Grad-CAM"],pts:[
+  "Fine-tuned ViT-B/16 on <b>3,662 retinal images</b> for 5-class diabetic retinopathy grading: <b>83.1% accuracy</b> and <b>0.88 QWK</b>.",
+  "Added Mixup + CutMix augmentation, reducing overfitting by about 8% and improving calibration error (ECE) from 0.08 to 0.05.",
+  "Generated Grad-CAM attention maps showing the model focuses on clinically relevant retinal regions and lesion patterns."]},
+ seg:{lab:"Segmentation",t:"E-commerce Customer Segmentation with Deep Embedded Clustering",org:"Amazon ML Summer School",when:"Jun 2026 – Aug 2026",tags:["PyTorch","DEC","HDBSCAN"],pts:[
+  "Trained DEC on <b>500K+ transactions</b>, finding 6 behavioral segments with a silhouette score of <b>0.58</b> vs 0.45 for K-Means.",
+  "Validated clusters with HDBSCAN, cutting noise from 15% to 7%, with significant revenue differences between segments (p &lt; 0.01).",
+  "Segment labels improved LTV prediction RMSE by <b>12%</b>; the top 2 segments account for 48% of revenue."]},
+ swap:{lab:"Swaption pricing",t:"Bermudan Swaption Pricing Engine",org:"Goldman Sachs Hackathon",when:"May 2026 – Jun 2026",tags:["Hull-White","Trinomial tree","Jamshidian decomposition"],pts:[
+  "Built an exotic rates pricing stack for a <b>$100M Bermudan payer swaption</b>, a product in the $500T+ OTC interest-rate market.",
+  "Calibrated a Hull-White one-factor model to 10 ATM swaption quotes via Jamshidian decomposition, with <b>&lt;0.05 bp RMSE</b>.",
+  "Computed 16 bucketed delta and vega Greeks by bump-and-reprice with warm-start recalibration, cutting runtime by about <b>70%</b>."]},
+ pod:{lab:"Pod intelligence",t:"AI-Driven Pod Resource Intelligence Mapping",org:"",when:"May 2026 – Jun 2026",tags:["K3s","Kubernetes","Prometheus","LLMs","React","WebSocket","D3"],pts:[
+  "Built a multi-agent K3s platform monitoring <b>100+ pods</b>, detecting anomalies in under 30 seconds with about <b>70% lower MTTD</b>.",
+  "Developed pod dependency mapping and sub-30-minute resource forecasting using LLMs and ensemble models.",
+  "Built a React + WebSocket dashboard with D3 graphs and automated alerts, cutting response time to <b>under 2 minutes</b>."]},
+ churn:{lab:"Churn MLOps",t:"Customer Churn Prediction Pipeline (MLOps)",org:"",when:"Apr 2026 – May 2026",tags:["FastAPI","MLflow","Docker","PostgreSQL","Airflow","GitHub Actions"],pts:[
+  "Built a 4-stage ML pipeline on 7,000+ records with Airflow orchestration, automated retries and real-time failure alerts.",
+  "Deployed a FastAPI prediction service with an MLflow-tracked model: about <b>89% accuracy</b>, <b>0.86 AUC</b> and &lt;200 ms p99 latency.",
+  "Containerized 5 services with Docker Compose and automated CI/CD with GitHub Actions, cutting deploy time to <b>under 5 minutes</b>."]},
+ flight:{lab:"Flight planner",t:"Flight Planner",org:"With Prof. Amit Kumar and Prof. Parag Singla",when:"Mar 2025 – Apr 2025",tags:["Graph algorithms","BFS","Dijkstra","Priority queues"],pts:[
+  "Designed a system that finds optimal flight routes by fewest hops, earliest arrival or cheapest fare using graph algorithms.",
+  "Built a custom priority queue with tuple ordering and an adjacency-list graph for multi-factor prioritization.",
+  "Implemented BFS, O(V+E), for shortest paths and heap-based Dijkstra's algorithm for cost optimization."]},
+ ride:{lab:"Ride booking",t:"Ride Booking Platform (Microservices)",org:"",when:"Apr 2026 – May 2026",tags:["Java","Spring Boot","Kafka","Redis","PostgreSQL","Resilience4j"],pts:[
+  "Built a <b>5-service microservices architecture</b> with 5 PostgreSQL databases, Eureka service discovery and API Gateway routing.",
+  "Implemented <b>17 REST APIs</b> with REST and Kafka communication, Resilience4j circuit breakers and idempotent payments.",
+  "Engineered Redis GEO driver matching, distributed rate limiting and correlation-ID tracing across 6 registered services."]},
+ meta:{lab:"Metadata runtime",t:"Metadata-Driven Application Runtime",org:"",when:"May 2026 – Jun 2026",tags:["Next.js","TypeScript","PostgreSQL","Prisma","Zod","Vercel"],pts:[
+  "Built a runtime that generates UIs, CRUD APIs and PostgreSQL schemas from JSON metadata, cutting scaffolding to <b>under 5 minutes</b>.",
+  "Unified <b>8+ API endpoints</b> into one parameterized route with Zod validation, type coercion and robust error handling.",
+  "Added Google and GitHub OAuth, CSV imports and real-time notifications across 30+ TypeScript components, deployed on Vercel."]},
+ saas:{lab:"SaaS metrics",t:"SaaS Metrics Dashboard",org:"",when:"Dec 2025 – Jan 2026",tags:["Pandas","Tableau","Power BI","Chart.js"],pts:[
+  "Built a 24-month MRR waterfall for <b>1,455 customers</b>, reaching <b>$142K MRR</b> ($1.71M ARR) at 110.3% year-on-year growth.",
+  "Analyzed LTV:CAC by channel, finding Referral strongest (<b>46.8x</b>) and Paid Search weakest (2.36x).",
+  "Diagnosed a hidden retention risk by contrasting a healthy-looking monthly NRR (about 98%) with trailing-12-month NRR."]},
+ funnel:{lab:"Activation funnel",t:"Product Activation Funnel Analysis",org:"Onboarding and retention",when:"Dec 2025 – Jan 2026",tags:["pandas","matplotlib","seaborn"],pts:[
+  "Analyzed <b>1,600 trial sign-ups</b> across a 5-stage funnel; Onboarding → Activation was the largest drop-off (61.1% conversion).",
+  "Segmented activation by channel, device and company size, uncovering a <b>4x gap</b> between Referral (67.3%) and Social/Ads (17.2%).",
+  "Linked activation to retention to size the ROI of fixing the funnel: activated users retained at <b>10.4x</b> the rate."]}
+};
+const STN=["readmit","retinal","seg","cgcnn","sql","ff","churn","pod","flight","swap","ride","meta","saas","funnel"];
+const ACH=[
+ ["Amazon ML Summer School","2026","Selected for an Applied Scientist interview at Amazon from 130,000 participants."],
+ ["WorldQuant BRAIN","2025","Research Consultant at Gold level in the WorldQuant BRAIN Challenge, building derivative alphas."],
+ ["Codeforces Expert","","Peak rating 1749; world ranks 316 and 596 in Codeforces Rounds 1093 and 1104."],
+ ["CFA Level I","2026","Enrolled as a CFA Level I candidate."],
+ ["McKinsey Forward Programme","2026","Selected for McKinsey's global learning program focused on financial services."],
+ ["InMobi iR.I.S.E Codies","2026","Shortlisted among 7,000+ participants from all IITs in a nationwide coding contest."],
+ ["KVPY Fellow","2022","All India Rank 2921 among 200,000+ candidates; recognized by the Government of India."],
+ ["WBJEE","2022","Rank 202 among 100,000+ candidates."]
+];
+const COURSES=["Data Structures and Algorithms","Introduction to Computer Science","Calculus","Linear Algebra and Differential Equations","Macroeconomics","Analog and Digital Electronics","Network Analysis","Electromagnetic Waves and Quantum Mechanics","Engineering Mechanics","Mechanics of Solids and Fluids","Engineering Thermodynamics","Introduction to Materials Science","Introduction to Electrical Engineering","Professional Ethics and Social Responsibility"];
+const $=id=>document.getElementById(id);
+const box=$("map"),svg=$("mapsvg"),tabsEl=$("tabs");
+const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const onL=(id,r)=>id==="ff"||L[r].p.includes(id);
+const mem=id=>L.map((l,r)=>onL(id,r)?r:-1).filter(r=>r>=0);
+const fromHash=()=>{const i=L.findIndex(l=>l.id===location.hash.slice(1));return i<0?0:i};
+let cur=fromHash(),anim=false,lastW=0;
+
+const draw=()=>{
+ const W=Math.round(box.clientWidth);if(!W)return;lastW=W;
+ const n=STN.length,v=W<560;let s="",H,X,Y;
+ if(!v){
+  const full=W>=1000,pl=full?218:128,pr=full?92:72,top=full?124:130,g=full?44:38,cw=(W-pl-pr)/n,rot=full?-45:-58;
+  X=(i,r)=>pl+cw*(i+.5);Y=(i,r)=>top+r*g;H=top+3*g+28;
+  STN.forEach((id,i)=>{s+=`<text data-stn="${id}" class="sl${onL(id,cur)?" on":""}" transform="translate(${(X(i)-3).toFixed(1)} ${top-22}) rotate(${rot})">${P[id].lab}</text>`});
+  L.forEach((l,r)=>{s+=`<text data-line="${l.id}" class="ll${r===cur?" on":""}" x="${pl-22}" y="${Y(0,r)+5}" text-anchor="end">${full?l.name:l.short}</text>`});
+ }else{
+  const top=52,g=28,x0=20,cg=24,tx=x0+3*cg+30;
+  X=(i,r)=>x0+r*cg;Y=(i,r)=>top+i*g;H=top+(n-1)*g+20;
+  STN.forEach((id,i)=>{s+=`<text data-stn="${id}" class="sl${onL(id,cur)?" on":""}" x="${tx}" y="${Y(i)+5}">${P[id].lab}</text>`});
+  L.forEach((l,r)=>{s+=`<g data-line="${l.id}" class="lb${r===cur?" on":""}"><circle cx="${X(0,r)}" cy="18" r="12" fill="${l.hex}"/><text class="lbt" x="${X(0,r)}" y="22.5" text-anchor="middle">${l.code}</text></g>`});
+ }
+ L.map((l,r)=>r).filter(r=>r!==cur).concat(cur).forEach(r=>{
+  const ix=STN.map((id,i)=>onL(id,r)?i:-1).filter(i=>i>=0),a=ix[0],b=ix[ix.length-1];
+  const d=`M${X(a,r).toFixed(1)} ${Y(a,r).toFixed(1)}L${X(b,r).toFixed(1)} ${Y(b,r).toFixed(1)}`;
+  s+=`<g data-line="${L[r].id}" class="ln${r===cur?" on":""}"><path class="hit" d="${d}"/><path class="tr${r===cur&&anim&&!rm?" draw":""}" d="${d}" pathLength="1" stroke="${L[r].hex}"/></g>`;
+ });
+ STN.forEach((id,i)=>{
+  const m=mem(id);
+  if(m.length>1){const a=m[0],b=m[m.length-1];s+=`<line data-stn="${id}" class="cn" x1="${X(i,a).toFixed(1)}" y1="${Y(i,a).toFixed(1)}" x2="${X(i,b).toFixed(1)}" y2="${Y(i,b).toFixed(1)}"/>`}
+  m.forEach(r=>{s+=`<circle data-stn="${id}" class="st${r===cur?" on":""}" cx="${X(i,r).toFixed(1)}" cy="${Y(i,r).toFixed(1)}" r="6.5" stroke="${L[r].hex}"><title>${P[id].t}</title></circle>`});
+ });
+ svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("height",H);svg.innerHTML=s;anim=false;
+};
+
+const item=id=>{
+ const x=P[id],others=id==="ff"?[]:L.filter((l,r)=>r!==cur&&onL(id,r));
+ return `<article class="item" id="p-${id}"><div><h4>${x.t}</h4>${x.org?`<p class="org">${x.org}</p>`:""}<p class="when">${x.when}</p><ul class="tags">${x.tags.map(t=>`<li>${t}</li>`).join("")}</ul></div><div><ul class="pts">${x.pts.map(p=>`<li>${p}</li>`).join("")}</ul>${others.length?`<div class="xch">Also on${others.map(l=>`<button type="button" data-go="${l.id}"><span class="bul" style="background:${l.hex}">${l.code}</span>${l.name}</button>`).join("")}</div>`:""}</div></article>`;
+};
+const used=l=>{
+ const sk=l.sk.map(x=>x[1]).join(", ").toLowerCase(),seen=new Set(),out=[];
+ ["ff",...l.p].forEach(id=>P[id].tags.forEach(t=>{const k=t.toLowerCase();if(!seen.has(k)&&!sk.includes(k)){seen.add(k);out.push(t)}}));
+ return out;
+};
+const render=()=>{
+ const l=L[cur];
+ $("cvhead").innerHTML=`<h2><span class="bul" style="background:${l.hex}">${l.code}</span>${l.name}</h2><p>${l.sum}</p>`;
+ $("cvmain").innerHTML=`<section><h3 class="sec">Experience</h3>${item("ff")}</section><section><h3 class="sec">Projects</h3>${l.p.map(item).join("")}</section>`;
+ $("skills").innerHTML=l.sk.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");
+ $("used").innerHTML=used(l).map(t=>`<li>${t}</li>`).join("");
+ [...tabsEl.children].forEach((b,i)=>{b.setAttribute("aria-selected",i===cur?"true":"false");b.tabIndex=i===cur?0:-1});
+ draw();
+};
+const go=el=>{if(el)el.scrollIntoView({behavior:rm?"auto":"smooth",block:"start"})};
+const select=r=>{
+ if(r<0)return;
+ if(r!==cur){cur=r;anim=true;render()}
+ if(location.hash.slice(1)!==L[r].id)location.hash=L[r].id;
+};
+
+tabsEl.innerHTML=L.map((l,i)=>`<button type="button" class="tab" role="tab" id="tab-${l.code}" data-i="${i}"><span class="bul" style="background:${l.hex}">${l.code}</span>${l.name}</button>`).join("");
+$("ach").innerHTML=ACH.map(([h,y,d])=>`<li><div class="h">${h}${y?`<span>${y}</span>`:""}</div><p>${d}</p></li>`).join("");
+$("courses").innerHTML=COURSES.map(c=>`<li>${c}</li>`).join("");
+
+const CVS=[
+ {l:0,file:"Akash_Kandar_CV_Data_Science.pdf",img:"Data_Science",role:"For data science, machine learning and applied scientist roles."},
+ {l:1,file:"Akash_Kandar_CV_Quant.pdf",img:"Quant",role:"For quantitative research, trading and finance roles."},
+ {l:2,file:"Akash_Kandar_CV_Tech.pdf",img:"Tech",role:"For software engineering and backend roles."},
+ {l:3,file:"Akash_Kandar_CV_Analytics_Consulting.pdf",img:"Analytics_Consulting",role:"For analytics, product and consulting roles."}
+];
+$("cvgrid").innerHTML=CVS.map((c,i)=>{const l=L[c.l];return `<article class="card" data-cv="${i}"><button type="button" class="thumb" data-view aria-label="Open the ${l.name} CV"><img src="img/${c.img}-thumb.webp" alt="First page of the ${l.name} CV" width="560" height="420" loading="lazy"></button><div class="cbody"><h3><span class="bul" style="background:${l.hex}">${l.code}</span>${l.name} CV</h3><p>${c.role}</p><div class="acts"><button type="button" class="btn" data-view>View</button><a class="btn pri" href="cv/${c.file}" download="${c.file}">Download PDF</a></div></div></article>`}).join("");
+
+const viewer=$("viewer");
+const view=i=>{
+ const c=CVS[i],l=L[c.l];
+ $("vtitle").innerHTML=`${l.name} CV`;
+ $("vdl").href="cv/"+c.file;$("vdl").setAttribute("download",c.file);
+ $("vpages").innerHTML=[1,2].map(n=>`<img src="img/${c.img}-${n}.webp" alt="Page ${n} of the ${l.name} CV" width="1240" height="1755">`).join("");
+ if(viewer.showModal)viewer.showModal();else viewer.setAttribute("open","");
+ viewer.scrollTop=0;
+};
+$("cvgrid").addEventListener("click",e=>{
+ const card=e.target.closest(".card");if(!card)return;const i=+card.dataset.cv;
+ if(e.target.closest("[data-view]"))view(i);
+});
+$("vclose").addEventListener("click",()=>viewer.close());
+viewer.addEventListener("click",e=>{if(e.target===viewer)viewer.close()});
+
+tabsEl.addEventListener("click",e=>{
+ const b=e.target.closest(".tab");if(!b)return;
+ select(+b.dataset.i);
+ const h=$("cvhead");if(h.getBoundingClientRect().top<0)go(h);
+});
+tabsEl.addEventListener("keydown",e=>{
+ if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
+ const r=(cur+(e.key==="ArrowRight"?1:L.length-1))%L.length;select(r);tabsEl.children[r].focus();
+});
+svg.addEventListener("click",e=>{
+ const t=e.target.closest("[data-stn],[data-line]");if(!t)return;
+ if(t.dataset.stn){const id=t.dataset.stn;select(onL(id,cur)?cur:L.findIndex((l,r)=>onL(id,r)));go($("p-"+id))}
+ else{select(L.findIndex(l=>l.id===t.dataset.line));go($("cvhead"))}
+});
+$("cvmain").addEventListener("click",e=>{
+ const b=e.target.closest("[data-go]");if(!b)return;
+ const id=b.closest(".item").id;select(L.findIndex(l=>l.id===b.dataset.go));go($(id));
+});
+addEventListener("hashchange",()=>{const i=fromHash();if(i!==cur){cur=i;anim=true;render()}});
+const ro=new ResizeObserver(()=>{if(Math.round(box.clientWidth)!==lastW)draw()});
+ro.observe(box);
+render();
+}
+</script>
+</body>
+</html>
